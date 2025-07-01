@@ -1,0 +1,123 @@
+{
+  "name": "arbos-frontend",
+  "version": "1.0.0",
+  "description": "AI-Powered Cross-Chain Trading Platform with Chainlink Integration",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "analyze": "cross-env ANALYZE=true next build",
+    "clean": "rm -rf .next out",
+    "postinstall": "husky install"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^1.4.0",
+    "@heroicons/react": "^2.0.18",
+    "@next/bundle-analyzer": "^14.0.4",
+    "chart.js": "^4.4.1",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "date-fns": "^3.0.6",
+    "ethers": "^6.8.1",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@next/eslint-config-next": "^14.0.4",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "autoprefixer": "^10.0.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^15.2.0",
+    "postcss": "^8",
+    "prettier": "^3.1.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.17.0",
+    "npm": ">=8.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,css,html,yml,yaml,scss}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run type-check"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "chainlink",
+    "ccip",
+    "cross-chain",
+    "arbitrage",
+    "defi",
+    "ethereum",
+    "avalanche",
+    "polygon",
+    "arbitrum",
+    "trading",
+    "portfolio",
+    "ai",
+    "next.js",
+    "typescript",
+    "web3"
+  ],
+  "author": {
+    "name": "ArbOS Team",
+    "email": "team@arbos.io",
+    "url": "https://arbos.io"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arbos/frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arbos/frontend/issues"
+  },
+  "homepage": "https://arbos.io"
+}
