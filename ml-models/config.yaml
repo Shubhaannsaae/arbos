@@ -1,0 +1,323 @@
+# ML Models Configuration
+# Production-ready configuration for Chainlink-integrated ML pipeline
+
+# Application Settings
+app:
+  name: "chainlink-ml-models"
+  version: "1.0.0"
+  environment: "production"  # development, staging, production
+  debug: false
+  log_level: "INFO"
+
+# Server Configuration
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  timeout: 300
+  max_requests: 1000
+  max_requests_jitter: 100
+
+# Chainlink Integration
+chainlink:
+  networks:
+    ethereum:
+      rpc_url: "${ETHEREUM_RPC_URL:-https://eth.llamarpc.com}"
+      chain_id: 1
+    avalanche:
+      rpc_url: "${AVALANCHE_RPC_URL:-https://api.avax.network/ext/bc/C/rpc}"
+      chain_id: 43114
+    polygon:
+      rpc_url: "${POLYGON_RPC_URL:-https://polygon-rpc.com}"
+      chain_id: 137
+  
+  data_feeds:
+    update_interval: 60  # seconds
+    price_feeds:
+      - symbol: "BTC/USD"
+        address: "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c"
+        decimals: 8
+      - symbol: "ETH/USD"
+        address: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+        decimals: 8
+      - symbol: "LINK/USD"
+        address: "0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c"
+        decimals: 8
+      - symbol: "AVAX/USD"
+        address: "0xFF3EEb22B5E3dE6e705b44749C2559d704923FD7"
+        decimals: 8
+
+  functions:
+    enabled: true
+    subscription_id: "${CHAINLINK_FUNCTIONS_SUBSCRIPTION_ID}"
+    gas_limit: 300000
+    secrets_location: 1  # Inline secrets
+
+  ccip:
+    enabled: true
+    router_addresses:
+      ethereum: "0x80226fc0Ee2b096224EeAc085Bb9a8cba1146f7D"
+      avalanche: "0xF4c7E640EdA248ef95972845a62bdC74237805dB"
+
+# Model Configuration
+models:
+  # Arbitrage Models
+  arbitrage:
+    price_prediction:
+      model_type: "xgboost"
+      sequence_length: 30
+      features: ["price", "volume", "volatility", "momentum"]
+      target_horizon: 1  # hours
+      retrain_frequency: "daily"
+    
+    opportunity_detection:
+      model_type: "random_forest"
+      threshold: 0.001  # 0.1% minimum profit
+      max_positions: 10
+      risk_tolerance: 0.02
+    
+    profitability:
+      model_type: "neural_network"
+      hidden_layers: [64, 32, 16]
+      transaction_cost: 0.001
+      slippage_model: "linear"
+
+  # Portfolio Models
+  portfolio:
+    risk_assessment:
+      model_type: "ensemble"
+      var_confidence: 0.95
+      lookback_period: 252
+      risk_factors: ["market", "credit", "liquidity", "operational"]
+    
+    allocation_optimizer:
+      model_type: "mean_variance"
+      risk_free_rate: 0.02
+      rebalance_frequency: "weekly"
+      max_weight: 0.3
+      min_weight: 0.05
+    
+    rebalancing_strategy:
+      model_type: "threshold_based"
+      drift_threshold: 0.05
+      minimum_trade_size: 100
+      tax_optimization: true
+
+  # Security Models
+  security:
+    fraud_detection:
+      model_type: "isolation_forest"
+      contamination: 0.1
+      anomaly_threshold: 0.8
+      alert_channels: ["webhook", "email"]
+    
+    anomaly_detection:
+      model_type: "autoencoder"
+      reconstruction_threshold: 0.95
+      sliding_window: 100
+      update_frequency: "hourly"
+    
+    risk_scoring:
+      model_type: "gradient_boosting"
+      score_range: [0, 100]
+      update_interval: 300  # seconds
+      risk_categories: ["low", "medium", "high", "critical"]
+
+  # Market Models
+  market:
+    sentiment_analysis:
+      model_type: "transformer"
+      model_name: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+      sources: ["twitter", "reddit", "news"]
+      update_frequency: "real_time"
+    
+    volatility_prediction:
+      model_type: "garch"
+      garch_p: 1
+      garch_q: 1
+      forecast_horizon: 24  # hours
+    
+    trend_analysis:
+      model_type: "ensemble"
+      indicators: ["sma", "ema", "rsi", "macd"]
+      timeframes: ["1h", "4h", "1d"]
+      confidence_threshold: 0.7
+
+# Data Configuration
+data:
+  # Data Sources
+  sources:
+    chainlink:
+      enabled: true
+      priority: 1
+      cache_ttl: 300  # seconds
+    
+    external_apis:
+      enabled: true
+      rate_limit: 100  # requests per minute
+      timeout: 30  # seconds
+      retry_attempts: 3
+    
+    dex_data:
+      enabled: true
+      subgraphs:
+        uniswap_v3: "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3"
+        sushiswap: "https://api.thegraph.com/subgraphs/name/sushiswap/exchange"
+
+  # Data Processing
+  preprocessing:
+    outlier_detection: "iqr"
+    missing_data_strategy: "interpolation"
+    normalization: "robust"
+    feature_selection: true
+    
+  # Data Storage
+  storage:
+    type: "postgresql"  # postgresql, mongodb, redis
+    connection_string: "${DATABASE_URL}"
+    connection_pool_size: 20
+    backup_frequency: "daily"
+    retention_period: "1y"
+
+# Training Configuration
+training:
+  # General Settings
+  general:
+    auto_retrain: true
+    retrain_frequency: "weekly"
+    validation_split: 0.2
+    test_split: 0.1
+    cross_validation: "time_series"
+    
+  # Resource Allocation
+  resources:
+    max_cpu_cores: 8
+    max_memory_gb: 16
+    gpu_enabled: false
+    distributed_training: false
+    
+  # Model Versioning
+  versioning:
+    enabled: true
+    registry_path: "./models"
+    max_versions: 10
+    auto_deployment: false
+
+# Inference Configuration
+inference:
+  # Real-time Inference
+  real_time:
+    enabled: true
+    batch_size: 32
+    max_latency_ms: 100
+    queue_size: 1000
+    
+  # Batch Inference
+  batch:
+    enabled: true
+    schedule: "0 */6 * * *"  # Every 6 hours
+    chunk_size: 10000
+    
+  # Model Serving
+  serving:
+    framework: "fastapi"
+    load_balancing: true
+    health_checks: true
+    metrics_collection: true
+
+# Monitoring and Alerting
+monitoring:
+  # Metrics
+  metrics:
+    enabled: true
+    prometheus_endpoint: "/metrics"
+    custom_metrics: ["prediction_latency", "model_accuracy", "error_rate"]
+    
+  # Logging
+  logging:
+    level: "INFO"
+    format: "json"
+    file_path: "/app/logs/app.log"
+    rotation: "daily"
+    retention: "30d"
+    
+  # Alerting
+  alerting:
+    enabled: true
+    channels:
+      - type: "webhook"
+        url: "${ALERT_WEBHOOK_URL}"
+      - type: "email"
+        smtp_server: "${SMTP_SERVER}"
+        recipients: ["${ALERT_EMAIL}"]
+    
+    rules:
+      - name: "high_error_rate"
+        condition: "error_rate > 0.05"
+        severity: "critical"
+      - name: "model_drift"
+        condition: "accuracy_drop > 0.1"
+        severity: "warning"
+      - name: "high_latency"
+        condition: "avg_latency > 500"
+        severity: "warning"
+
+# Security Configuration
+security:
+  # API Security
+  api:
+    rate_limiting: true
+    rate_limit: "100/hour"
+    cors_enabled: true
+    cors_origins: ["*"]
+    
+  # Authentication
+  authentication:
+    enabled: false  # Set to true for production
+    method: "jwt"  # jwt, api_key, oauth
+    token_expiry: 3600  # seconds
+    
+  # Data Encryption
+  encryption:
+    at_rest: true
+    in_transit: true
+    algorithm: "AES-256"
+
+# Development Configuration
+development:
+  debug: true
+  auto_reload: true
+  test_mode: false
+  mock_external_apis: false
+  
+  # Testing
+  testing:
+    unit_tests: true
+    integration_tests: true
+    load_testing: false
+    coverage_threshold: 0.8
+
+# Production Optimizations
+production:
+  # Performance
+  performance:
+    model_caching: true
+    connection_pooling: true
+    async_processing: true
+    batch_optimization: true
+    
+  # Scaling
+  scaling:
+    horizontal_scaling: true
+    auto_scaling: true
+    min_instances: 2
+    max_instances: 10
+    cpu_threshold: 70
+    memory_threshold: 80
+    
+  # Deployment
+  deployment:
+    strategy: "rolling"
+    max_unavailable: 1
+    max_surge: 1
+    health_check_grace_period: 30
