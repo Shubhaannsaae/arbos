@@ -1,0 +1,132 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": true,
+
+    /* Modules */
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/controllers/*": ["src/controllers/*"],
+      "@/services/*": ["src/services/*"],
+      "@/middleware/*": ["src/middleware/*"],
+      "@/models/*": ["src/models/*"],
+      "@/routes/*": ["src/routes/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/config/*": ["src/config/*"],
+      "@/types/*": ["src/types/*"],
+      "@/test/*": ["src/test/*"]
+    },
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "checkJs": false,
+
+    /* Emit */
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "noEmit": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+
+    /* Completeness */
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+
+    /* Advanced */
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "assumeChangesOnlyAffectDirectDependencies": true,
+
+    /* Debugging */
+    "listFiles": false,
+    "listEmittedFiles": false,
+    "traceResolution": false,
+    "diagnostics": false,
+    "extendedDiagnostics": false,
+
+    /* Output Formatting */
+    "pretty": true,
+    "preserveWatchOutput": true,
+
+    /* Watch Options */
+    "watchOptions": {
+      "watchFile": "useFsEvents",
+      "watchDirectory": "useFsEvents",
+      "fallbackPolling": "dynamicPriority",
+      "synchronousWatchDirectory": true,
+      "excludeDirectories": ["**/node_modules", "**/.git", "**/dist", "**/coverage"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "src/**/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "docs",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__tests__/**/*",
+    "**/__mocks__/**/*",
+    "test/**/*",
+    "jest.config.js",
+    "jest.e2e.config.js"
+  ],
+  "references": [],
+  "typeAcquisition": {
+    "enable": false,
+    "include": [],
+    "exclude": []
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "require": ["tsconfig-paths/register"],
+    "transpileOnly": true,
+    "files": true,
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "ES2022",
+      "moduleResolution": "node"
+    }
+  }
+}
