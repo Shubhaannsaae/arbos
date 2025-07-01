@@ -35,31 +35,6 @@ ArbOS is a production-grade, AI-powered cross-chain trading platform integrating
 - **Risk Management** - Automated stop-loss and take-profit
 - **Backtesting** - Historical performance analysis
 
-## 🏗️ Architecture
-
-ArbOS/
-├── contracts/ # Smart contracts (Solidity)
-│ ├── core/ # Core trading and portfolio contracts
-│ ├── security/ # Security and monitoring contracts
-│ ├── chainlink/ # Chainlink service integrations
-│ └── governance/ # DAO and governance contracts
-├── backend/ # Python backend services
-│ ├── arbitrage/ # ML arbitrage detection
-│ ├── portfolio/ # Portfolio optimization
-│ ├── security/ # Security monitoring
-│ └── analytics/ # Market analytics
-├── frontend/ # React/Next.js frontend
-│ ├── components/ # React components
-│ ├── hooks/ # Custom React hooks
-│ ├── services/ # API services
-│ └── pages/ # Next.js pages
-├── cross-chain/ # Cross-chain infrastructure
-│ ├── ccip/ # CCIP integration
-│ ├── bridges/ # Multi-protocol bridges
-│ ├── routers/ # Optimal routing
-│ └── monitoring/ # Cross-chain monitoring
-└── shared/ # Shared utilities and types
-
 ## 🛠️ Technology Stack
 
 ### Smart Contracts
