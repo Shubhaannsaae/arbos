@@ -285,7 +285,6 @@ secrets/
 *.model
 
 # Data files
-data/
 datasets/
 *.csv
 *.json.gz
