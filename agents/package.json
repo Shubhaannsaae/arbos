@@ -1,0 +1,59 @@
+{
+  "name": "arbos-ai-agents",
+  "version": "1.0.0",
+  "description": "Production-ready AI agents for ArbOS platform with Chainlink and AWS Bedrock integration",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^1.4.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.540.0",
+    "@aws-sdk/client-bedrock": "^3.540.0",
+    "ethers": "^6.11.1",
+    "axios": "^1.6.8",
+    "ws": "^8.16.0",
+    "node-cron": "^3.0.3",
+    "winston": "^3.13.0",
+    "joi": "^17.12.3",
+    "bignumber.js": "^9.1.2",
+    "lodash": "^4.17.21",
+    "redis": "^4.6.13",
+    "uuid": "^9.0.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/ws": "^8.5.10",
+    "@types/lodash": "^4.17.0",
+    "@types/uuid": "^9.0.8",
+    "@types/node-cron": "^3.0.11",
+    "typescript": "^5.4.5",
+    "ts-node": "^10.9.2",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ai-agents",
+    "chainlink",
+    "aws-bedrock",
+    "defi",
+    "arbitrage",
+    "portfolio-management",
+    "blockchain"
+  ],
+  "author": "ArbOS Team",
+  "license": "MIT"
+}
